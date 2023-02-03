@@ -1,0 +1,15 @@
+{
+  "name": "webgl-sandbox",
+  "version": "0.1.0",
+  "description": "a template for quickly bootstrapping webgl, to get to the funn bits ;)",
+  "main": "src/index.html",
+  "scripts": {
+    "dev": "vite src"
+  },
+  "author": "Plecra",
+  "license": "UNLICENSE",
+  "devDependencies": {
+    "typescript": "^4.9.5",
+    "vite": "^4.1.1"
+  }
+}
