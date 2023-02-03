@@ -31,12 +31,13 @@ export function makeVAO(
     return withVAO(gl, assert(gl.createVertexArray()), () => {
         range(gl.getProgramParameter(program, gl.ACTIVE_ATTRIBUTES)).map(i => {
             const desc = assert(gl.getActiveAttrib(program, i));
+            if (desc.name === "gl_InstanceID") return [desc.name, i];
 
             const buffer = gl.createBuffer();
             gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
             gl.enableVertexAttribArray(i);
             switch (desc.type) {
-                case gl.FLOAT_VEC2:
+                case gl.FLOAT_VEC2: {
                     if (!(desc.name in buffers))
                         throw new Error(`Missing attribute for vertex shader: ${desc.name}`);
                     const input = buffers[desc.name];
@@ -45,6 +46,7 @@ export function makeVAO(
                     gl.bufferData(gl.ARRAY_BUFFER, array, gl.STATIC_DRAW);
                     gl.vertexAttribPointer(i, 2, gl.FLOAT, false, 0, 0);
                     break;
+                }
                 default:
                     throw new Error(`Unknown WebGL type ${desc.type}`);
             }

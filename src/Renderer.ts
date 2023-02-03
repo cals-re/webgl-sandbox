@@ -32,7 +32,7 @@ export default class {
       // typical triangle uvs
       texture_xy: [[0, 0], [0, 1], [1, 0]],
       // Two instances of the triangle
-      object_xy: [[-0.6, 0], [0.6, 0]],
+      object_xy: [[-0.6, 0.1], [0.6, 0.1], [-0.6, 0], [0.6, 0]],
     }),
     () => {
       // Mark `object_xy` to be used for instancing. We tell it to use each position once.
@@ -46,6 +46,6 @@ export default class {
     this.gl.uniform1f(this.uniforms.time, now);
     this.gl.uniformMatrix4fv(this.uniforms.view, false, view_matrix);
 
-    withVAO(this.gl, this.vao, () => this.gl.drawArraysInstanced(this.gl.TRIANGLES, 0, 3, 2));
+    withVAO(this.gl, this.vao, () => this.gl.drawArraysInstanced(this.gl.TRIANGLES, 0, 3, 4));
   }
 }
